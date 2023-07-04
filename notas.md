@@ -19,3 +19,12 @@
     ]
 }
 ```
+* tipos de importaciones con Alias: 
+
+```js
+import * as HeroClasses from './classes/Hero'
+import { Hero as SuperHero } from './classes/Hero'
+
+// importacion por defecto 
+import powers, { Power } from './data/powers'
+```
