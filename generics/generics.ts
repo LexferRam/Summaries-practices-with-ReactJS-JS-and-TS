@@ -1,5 +1,59 @@
 /*
-Una funcion genérica es una función que puede recibir cualquier tipo de parámetro
+Una funcion genérica es una función que puede recibir cualquier tipo de parámetro.
+
+Generics:  being able to create a component that can work over a variety of types rather than a single one. This allows users to consume these components and use their own types.
+
+function identity<Type>(arg: Type): Type {
+  return arg;
+}
+
+We’ve now added a type variable Type to the identity function. This Type allows us to capture the type the user provides (e.g. number), so that we can use that information later. Here, we use Type again as the return type. On inspection, we can now see the same type is used for the argument and the return type. This allows us to traffic that type information in one side of the function and out the other.
+
+let output = identity<string>("myString");
+
+Here we explicitly set Type to be string as one of the arguments to the function call, denoted using the <> around the arguments rather than ().
+
+The second way is also perhaps the most common. Here we use type argument inference — that is, we want the compiler to set the value of Type for us automatically based on the type of the argument we pass in:
+
+let output = identity("myString");
+
+* Generic interface function
+
+interface GenericIdentityFn {
+  <Type>(arg: Type): Type;
+}
+ 
+function identity<Type>(arg: Type): Type {
+  return arg;
+}
+ 
+let myIdentity: GenericIdentityFn = identity;
+
+* Another sintax (This makes the type parameter visible to all the other members of the interface.)
+
+interface GenericIdentityFn<Type> {
+  (arg: Type): Type;
+}
+ 
+function identity<Type>(arg: Type): Type {
+  return arg;
+}
+ 
+let myIdentity: GenericIdentityFn<number> = identity;
+
+* Using Type Parameters in Generic Constraints
+
+function getProperty<Type, Key extends keyof Type>(obj: Type, key: Key) {
+  return obj[key];
+}
+ 
+let x = { a: 1, b: 2, c: 3, d: 4 };
+ 
+getProperty(x, "a");
+getProperty(x, "m");
+
+!!Argument of type '"m"' is not assignable to parameter of type '"a" | "b" | "c" | "d"'.
+
 */
 import { Pokemon } from "../interfaces/Pokemon"
 
