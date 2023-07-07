@@ -1,6 +1,10 @@
 (() => {
 
-    const fullName = (firstName: string, ...restArgs: string[]): string => {
+    // el parametro de tipo rest(...restParams) crea un array con los valores restantes de los parametros
+    const fullName = (
+        firstName: string, 
+        ...restArgs: string[]
+    ): string => {
         return `${firstName} ${restArgs.join(' ')}`
     }
 
