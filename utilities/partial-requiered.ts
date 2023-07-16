@@ -21,5 +21,5 @@ interface User2 {
 }
   
   // Usando `Required` para hacer todas las propiedades de User obligatorias
-  type RequiredUser = Required<User>;
+  type RequiredUser = Required<User2>;
 
