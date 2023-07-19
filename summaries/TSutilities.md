@@ -142,3 +142,7 @@ TypeScript adds a typeof operator you can use in a type context to refer to the 
     let s = "hello";
     let n: typeof s;//let n: string
 ```
+
+**In**
+
+La palabra clave in puede usarse para iterar sobre todos los elementos en una unión de claves. Podemos utilizar esta función para generar mapped types.

@@ -168,7 +168,7 @@ type IntersectionType = A & B;
 ```
 
 **Casting**
-Casting is the process of overriding a type. There are times when working with types where it's necessary to override the type of a variable, such as when incorrect types are provided by a library.
+Casting is also referred to as type conversion it is a process of transforming one data type into another data type in typescript. Type casting is necessary when we need to override a type, such as when incorrect types are provided by a library..
 
 ```ts
     // Angle Bracket Syntax
