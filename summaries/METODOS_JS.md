@@ -140,3 +140,89 @@ para ordenar arreglo de numeros:
 
 numbers.sort((a,b) => a - b) // de menor a mayor
 numbers.sort((a,b) => b - a) // de mayor a menor
+
+**Inmutabilidad**
+Una de las características más importantes de los lenguajes funcionales es que sus estructuras de datos son inmutables lo que ayuda a reducir la complejidad del software. Un valor inmutable es algo que no puede ser cambiado.
+
+¿Entonces que hacer cuando necesitas un objeto o valor idéntico al original pero solo con algunos atributos diferentes?. Hasta ahora lo que hacíamos es mutar la variable original y continuar con nuestras vidas. Pero si consideramos esa variable inmutable entonces tendremos que hacer una copia y manipular la copia en vez del original.
+
+¿Por qué la inmutabilidad es importante?
+Básicamente porque te permite representar estados de forma correcta y eliminar los "side effects".  Es mucho más fácil seguir la lógica de un software que no modifica sus variables que uno que permite que sus variables cambien a diestra y siniestra.
+
+Entonces, queremos asegurarnos de que nuestros objetos no sean mutados. En esencia lo que necesitamos es una función pura.
+Una función pura tiene dos propiedades esenciales: El valor que retorna depende sólo de los argumentos de entrada. O lo que es lo mismo, el valor de retorno no cambiará si los valores de entrada no cambian. No tiene efectos secundarios. Esto significa que no puede modificar ninguna variable fuera de su alcance.
+
+**forma para mantener el principio de inmutabilidad:**
+Operador spread. permite crear un nuevo objeto copiando las propiedades de otro objeto. Es decir, crea una copia superficial del objeto original.
+
+```js
+let newObj = {...data, attribute: 'something' }
+```
+
+**Arreglos**
+
+El objeto Array define algunas **operaciones mutables**, es decir, modifican el arreglo original al operar sobre el: push, pop, splice, shift,unshift, reverse y sort. Usar estos métodos implica la existencia de side effects y posibles bugs difíciles de rastrear.
+
+**operaciones mutables**, Transformemos estos métodos para funcionar de forma inmutables:
+
+**Push**
+
+```js
+const newUsuarios = [...usuarios, newUser ]
+```
+
+**Unshift**
+
+```js
+const newUsuarios = [newUser, ...usuarios]
+```
+
+**Pop**
+
+```js
+const newUsuarios = usuarios.slice(0, usuarios.length - 1)
+const user = usuarios[usuarios.length - 1];
+```
+
+**Shift**
+
+```js
+const user = usuarios[0];
+const newUsuarios = usuarios.slice(1)
+```
+
+**Splice**
+
+Para transformar esta operación en inmutable nuevamente hacemos uso de splice y  el operador  spread
+
+```js
+const newUsuarios = [...usuarios.slice(0,1), newUser, ...usuarios.slice(3)]
+```
+
+**Sort y reverse**
+
+Obtenemos una copia del arreglo y operamos sobre esta copia.
+
+```js
+    const sorted = [...usuarios].sort(compare)
+    const inverted = [...usuarios].reverse()
+    const sortedAndInverted = [...sorted].reverse()
+```
+
+**¿Qué es la programación funcional?**
+
+La programación funcional es un paradigma de programación o un estilo de programación que se basa en gran medida en el uso de funciones puras, que son funciones que no tienen efectos secundarios y son aisladas.
+
+**Hay cuatro tipos principales de funciones.**
+
+1. **Funciones de primera clase:** En JavaScript, todas las funciones son funciones de primera clase. Eso significa que pueden tratarse como cualquier otra variable. Pueden asignarse a variables, pueden pasarse como argumentos a otras funciones y pueden devolverse como valores de otras funciones.
+
+2. **Funciones Callback:** Una función de devolución de llamada es una función que se pasa a otra función como un argumento, que luego se invoca dentro de la función externa para completar algún tipo de rutina o acción.
+
+3. **Funciones de orden superior(High Order Funtion):** Una función de orden superior es una función que acepta otras funciones como argumentos o devuelve una función como valor de retorno.
+
+
+**Principios de la programación funcional**
+
+* Evite mutaciones y efectos secundarios.
+* Abstracción: Las abstracciones ocultan detalles y nos permiten hablar sobre problemas en un nivel superior 

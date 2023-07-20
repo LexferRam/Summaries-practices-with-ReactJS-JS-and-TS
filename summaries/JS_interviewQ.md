@@ -26,3 +26,7 @@ The idea is that if we have a lot of elements handled in a similar way, then ins
         })
     })
 ```
+
+**What is an event loop in JavaScript?**
+
+Event loop: An event loop is infinit loop that pulls stuff out of the queue and places it onto the function execution stack whenever the function stack becomes empty.
