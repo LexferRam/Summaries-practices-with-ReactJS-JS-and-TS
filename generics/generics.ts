@@ -75,7 +75,11 @@ import { Pokemon } from "../interfaces/Pokemon"
     const genericArrowFunction = <T>(argument: T): T => argument
 
     genericFunction('lexfer')
+    console.log(genericFunction('lexfer'))
+    //        ^?
     genericFunction(new Date())
+    console.log(new Date())
+    //        ^?
     genericArrowFunction(23445)
 
     // ---------------------------------------------------------------------------------
