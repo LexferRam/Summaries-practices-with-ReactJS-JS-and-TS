@@ -102,3 +102,34 @@ example:
             <div className='ele6'>element6</div>
         </div>
 ```
+
+## Dinamic Grid
+## **Grid auto-fit**
+
+is a property that allows us to automatically create columns that fit the size of our container.
+
+```css
+    .grid {
+        display: grid;
+        gap: 1em;
+        grid-template-columns: repeat(
+            auto-fit, 
+            minmax(150px, 1fr)
+        );
+    }
+```
+
+## **Grid auto-fill**
+
+is a property that allows us to automatically create columns that fill the size of our container.
+
+```css
+    .grid {
+        display: grid;
+        gap: 1em;
+        grid-template-columns: repeat(
+            auto-fill, 
+            minmax(150px, 1fr)
+        );
+    }
+```
