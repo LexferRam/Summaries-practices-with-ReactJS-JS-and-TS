@@ -293,5 +293,192 @@ const App2 = (): JSX.Element => {
 export default App2
 ```
 
+**Custom Type Prettify**
 
+```js
+    interface ICoolThing {
+        cool: boolean;
+    }
+
+    interface ICoolThing2 extends ICoolThing{
+        name?: string;
+    }
+
+    type Prettify<T> = {
+        [k in keyof T]: T[k]
+    } & {}
+
+    const coolObject: Prettify<ICoolThing2> = {
+        cool: true,
+    }
+```
+
+**ReactJS Type helper React.ComponentProps<""> / ComponentPropsWithRef<"">**
+
+React.ComponentProps<""> is a type helper that allows you to get the props of any DOM element that we pass to get the props for that element.
+If we want to get the props for a button element, we can use React.ComponentProps<"button">.
+
+```js
+
+// Get the props of elements
+type ButtonProps = React.ComponentProps<"button">;
+
+// Get the props of a component
+type MyComponentProps = React.ComponentProps<typeof MyComponent>;
+
+// Get the props of elements with the associated ref:
+type ButtonProps = React.ComponentPropsWithRef<"button">;
+
+```
+
+**ElementRef<"HTML element">**
+
+Is a type helper from React, to easily extract the type from the element you're targeting.
+
+```js
+import { useRef, ElementRef } from 'react';
+
+const Component = () => {
+  const audioRef = useRef<ElementRef<"audio">>(null);
+
+  return <audio ref={audioRef}>Hello</audio>;
+};
+```
+
+**conts assertions**
+
+In TypeScript, const assertions are a way to tell the TypeScript compiler that a variable or expression has a literal type. This can be useful for a variety of reasons, such as:
+
+Improving type safety: By asserting that a variable has a literal type, you can help to ensure that the variable will not be assigned a value that is outside of the allowed range.
+Reducing boilerplate code: Const assertions can help to reduce the amount of boilerplate code that you need to write. For example, if you have an array of literal strings, you can use a const assertion to tell the TypeScript compiler that the array has a literal type. This will prevent you from having to write a type annotation for each element in the array.
+Enhancing readability: Const assertions can help to enhance the readability of your code by making it clear what the literal type of a variable or expression is.
+
+In Redux, we build up a union of allowed actions that a reducer function can take to get good type safety around the actions we are dispatching
+
+```js
+interface SetCount {
+  type: 'SET_COUNT';
+  payload: number;
+}
+
+interface ResetCount {
+  type: 'RESET_COUNT';
+}
+
+const setCount = (n: number): SetCount => {
+  return {
+    type: 'SET_COUNT',
+    payload: n,
+  }
+}
+
+const resetCount = (): ResetCount => {
+  return {
+    type: 'RESET_COUNT',
+  }
+}
+
+type CountActions = SetCount | ResetCount
+```
+
+With const assertions, we can remove the need for declaring all of these interfaces by using a combination of const, ReturnType, and typeof:
+
+```js
+const setCount = (n: number) => {
+  return <const>{
+    type: 'SET_COUNT',
+    payload: n
+  }
+}
+
+const resetCount = () => {
+  return <const>{
+    type: 'RESET_COUNT'
+  }
+}
+
+type CountActions = ReturnType<typeof setCount> | ReturnType<typeof resetCount>;
+```
+
+**useContext**
+
+whenever you use createContext pass a type argument to it, so it is going to be strongly type whe we use useContext. i.e:
+
+```js
+import { createContext, useContext } from 'react'
+
+type ThemeContextType = "light" | "dark" 
+
+const ThemeContext = createContext<ThemeContextType>("light")
+
+const Component = () => {
+
+    // theme is going to be of type ThemeContextType
+    const theme = useContext(ThemeContext)
+    return (
+        <div>
+            {theme}
+        </div>
+    )
+}
+```
+
+```js
+import { createContext, useContext } from 'react'
+
+type ThemeContextType = "light" | "dark" 
+
+const ThemeContext = createContext<ThemeContextType | null>(null)
+
+const useThemeContext = () => {
+
+    // theme is going to be of type ThemeContextType
+    const context = useContext(ThemeContext)
+
+    if (context === null){
+        throw new Error("useThemeContext must be used within a ThemeProvider")
+    }
+
+    return context
+}
+```
+
+**Dinamics types in ReactJS components**
+
+```js
+const ParentComponent = () => {
+    // if type = alert, confirmButtonMessage is not required
+    return <Modal type="confirm" confirmButtonMessage="Confirm message" />
+}
+
+type ModalProps = 
+    | { type: "confirm", confirmButtonMessage: string }
+    | { type: "alert" }
+
+const Modal = (props: ModalProps) => {
+    return null
+}
+```
+
+**Generics Components**
+
+```js
+type TableProps<T> = {
+    data: T[];
+    onRowClick: (row: T) => void;
+}
+
+const Table = <T, extends any>(props: TableProps<T>) => {
+    return null
+}
+
+const Parent = () => {
+    return(
+        <Table 
+            data={[{name: "John", age: 20}]}
+            onRowClick={(row) => console.log(row)} // row is of type {name: string, age: number}
+        />
+    )
+}
+```
 
