@@ -151,3 +151,36 @@ the page HTML is generated at build time. That means in production, the page HTM
 
 * **Incremental Static Regeneration(ISR):**
  allows the regeneration of static pages during runtime that means you can update content on your site without redeploying. It’s a hybrid solution of SSG and SSR.
+
+8. **what is Vite**
+
+Vite is a build tool that aims to provide a faster and leaner development experience for modern web projects. It consists of two major parts:
+
+* A dev server that serves your source files over native ES modules, with rich built-in features and astonishingly fast Hot Module Replacement (HMR).
+* A build command that bundles your code with Rollup, pre-configured to output highly optimized static assets for production.
+
+Vite was designed with speed in mind. It takes advantage of modern browser features like ES modules to provide near-instantaneous page reloads during development. This means that developers can make changes to their code and see the results in the browser without waiting for a full build process. Vite accomplishes this by bundling and serving the code on the fly, rather than creating a pre-built bundle. Vite also supports asynchronous loading of modules, which allows it to load only the necessary parts of the code that are needed at the time. This approach significantly reduces the amount of time required to build and serve a web application.
+
+
+9. **JS Custom event**
+
+```js
+    // listenig custom event
+    useEffect(() => { 
+        const handleCallEvent = ((event: CustomEvent<boolean>) => { 
+            console.log(event.detail) 
+        }) as any 
+            window.addEventListener("testEvent", handleCallEvent) 
+            return () => window.removeEventListener("testEvent", handleCallEvent) 
+    }, [])
+
+    //executing custom event
+    <button
+        onClick={() => {
+            const event = new CustomEvent("testEvent", { detail: 'test' } );
+            window.dispatchEvent(event);
+        }}
+    >
+        Custom Event
+    </button>
+```
