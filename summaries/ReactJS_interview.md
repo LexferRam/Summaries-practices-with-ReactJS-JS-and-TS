@@ -184,3 +184,32 @@ Vite was designed with speed in mind. It takes advantage of modern browser featu
         Custom Event
     </button>
 ```
+
+10. **Functional updates**
+
+If the new state is computed using the previous state, you can pass a function to setState. The function will receive the previous value, and return an updated value.
+useState does not automatically merge update objects. You can replicate this behavior by combining the function updater form with object spread syntax:
+  
+  ```js
+      const [state, setState] = useState({});
+      setState(prevState => {
+          // Object.assign would also work
+          return {...prevState, ...updatedValues};
+      });
+  ```
+
+  11. **Life cycles methods**
+
+  * **componentDidMount()**
+  This method is invoked immediately after a component is mounted. If you need to load data from a remote endpoint, this is a good place to instantiate the network request.
+
+  * **componentDidUpdate()**
+  This method is invoked immediately after updating occurs. This method is not called for the initial render.
+
+  * **componentWillUnmount()**
+  This method is invoked immediately before a component is unmounted and destroyed. Perform any necessary cleanup in this method, such as invalidating timers, canceling network requests, or cleaning up any subscriptions that were created in componentDidMount().
+
+  * **componentDidCatch()**
+  This method is invoked when an error occurs during rendering, in a lifecycle method, or in the constructor of any child component.
+
+  
