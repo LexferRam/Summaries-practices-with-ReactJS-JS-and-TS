@@ -186,3 +186,35 @@ export const MyFormAControlled = withControlledForm(MyFormA, { name: 'Lexfer Ram
 ```
 
 - **State Reducer:** This pattern allow a user to control how a child's state is managed.
+
+- **Polimorphic components:** This pattern allows us to create components that can render different types of children.
+
+```js
+    function Button(props){
+        const {children, ...rest} = props;
+
+        return <button {...rest}>{children}</button>
+    }
+
+    function Link(props){
+        const {children, ...rest} = props;
+
+        return <a {...rest}>{children}</a>
+    }
+
+    function PolimorphicComponent(props){
+        const {as: Component = 'button', ...rest} = props;
+
+        return <Component {...rest} />
+    }
+
+    function App(){
+        return(
+            <div>
+                <PolimorphicComponent as={Button} onClick={()=>{console.log('click')}}>Button</PolimorphicComponent>
+                <PolimorphicComponent as={Link} href="https://google.com">Link</PolimorphicComponent>
+            </div>
+        )
+    }
+```
+
