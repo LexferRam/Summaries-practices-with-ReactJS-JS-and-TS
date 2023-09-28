@@ -5,10 +5,15 @@ Design principles are a set of guidelines that must be follow to create cleaner 
 * **SOLID**
 
 	**S: Single responsibility** ==> a component must have only one reason to change.
+
 	**O: Open-close** ==> a component must be open for extension and closed for modification.
+
 	**L: Liskov substitution:** ==> to build software systems with replaceable parts, those parts must be adhere to a contract.
+
 	**I: Interface segregation** ==> a component should not depend on things it does not need.
+    
 	**D: Dependency inversion** ==> Our code should depend on abstractions, not concretes.
+    
 
 * **DRY: ‘don’t repeat yourself,’** is a principle of software development that aims at reducing the repetition of patterns and code duplication in favor of abstractions and avoiding redundancy.
 
