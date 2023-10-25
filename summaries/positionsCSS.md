@@ -1,7 +1,7 @@
 # Positions CSS
 
 Nos definen el "Flujo" de nuestra pagina web, es decir, como se van a ir colocando los elementos en la pagina de forma natural.
-Position nos permite modificar el flujo de la web y se encarga de decirle a nuestros elementos que tipo de referencia tiene que tomar para posicionarse, entonces dependiendo de cual usemos va a tomar una referencia diferente.
+Position nos permite modificar el flujo de la web y se encarga de decirle a nuestros elementos **que tipo de referencia tiene que tomar** para posicionarse, entonces dependiendo de cual usemos va a tomar una referencia diferente.
 
 ## **Relative**
 
