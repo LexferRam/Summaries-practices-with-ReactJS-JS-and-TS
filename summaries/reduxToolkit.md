@@ -1,6 +1,6 @@
 # Redux Toolkit
 
-1. Instalar: `yarn add @reduxjs/toolkit redux-logger @types/redux-logger`
+1. Instalar: `yarn add @reduxjs/toolkit redux-logger @types/redux-logger react-redux`
 
 2. **Create the store app/store.ts:** 
 
